@@ -50,7 +50,7 @@ jobs:
           docker run 
             -d 
             --name kconnect-signalling-server  
-            -p 123456:8999
+            -p 12345:8999
             phongvanngo/kconnect-signalling-server:latest;
             docker image prune --filter="dangling=true"  -f;
         
