@@ -23,7 +23,7 @@ jobs:
     - name: Build the Docker image
       run: 
         echo hello;
-        docker build -t phongvanngo/kconnect-signalling-server:latest
+        docker build . -t phongvanngo/kconnect-signalling-server:latest;
         docker tag phongvanngo/kconnect-signalling-server:latest phongvanngo/kconnect-signalling-server:$version;
         
     - name: Push Docker Image
