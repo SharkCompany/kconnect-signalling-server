@@ -1,11 +1,9 @@
-import { JoinRoomDTO, OnJoinRoomDTO } from "../dto/onMessage/onJoinRoom";
+import { JoinRoomDTO } from "../dto/onMessage/onJoinRoom";
 import { CreateRoomRequestDTO } from "../dto/request/CreateRoomRequestDTO";
 import { JoinRoomRequestDTO } from "../dto/request/JoinRoomRequestDTO";
 import { MemberModel } from "../model/MemberModel";
 import { RoomModel } from "../model/RoomModel";
-import { UserModel } from "../model/UserModel";
 import { RoomRepository } from "../repository/RoomRepository";
-import { generateString } from "../utils/generate";
 
 export class RoomService {
   static joinRoom({
@@ -13,6 +11,7 @@ export class RoomService {
     room: { roomId },
     socketId,
     offer,
+    agoraToken,
   }: JoinRoomDTO): [MemberModel, RoomModel] | [null, null] {
     if (!roomId) return [null, null];
     let roomToJoin = RoomRepository.findById(roomId);
@@ -22,6 +21,7 @@ export class RoomService {
       username: user.username,
       socketId: socketId,
       offer: offer,
+      agoraToken: agoraToken,
     };
     roomToJoin.members.push(newMember);
     RoomRepository.updateById(roomId, roomToJoin);
