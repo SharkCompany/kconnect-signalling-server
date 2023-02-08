@@ -53,4 +53,4 @@ jobs:
             -p 12345:8999
             phongvanngo/kconnect-signalling-server:latest;
             docker image prune --filter="dangling=true"  -f;
-        
+          docker images;
