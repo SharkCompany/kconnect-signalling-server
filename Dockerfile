@@ -9,7 +9,7 @@ WORKDIR /
 COPY package.json ./
 COPY yarn.lock ./
 
-RUN yarn --prod
+RUN yarn 
 # If you are building your code for production
 # RUN npm ci --only=production
 
