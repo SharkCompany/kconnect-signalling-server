@@ -22,6 +22,10 @@ app.use(
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  return res.send("hello from kconnect signalling server");
+});
+
 app.use("/room", roomRouter);
 
 // initialize a simple http server
