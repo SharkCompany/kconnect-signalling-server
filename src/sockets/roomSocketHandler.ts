@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { OnJoinRoomDTO } from "../dto/onMessage/onJoinRoom";
+import { EmitMessageType, OnNewMessageType } from "../model/MessageModel";
 import { RequestJoinRoom } from "../model/RoomModel";
 import { UserModel } from "../model/UserModel";
 import { RoomService } from "../services/RoomService";
@@ -35,8 +36,15 @@ export const roomSocketHandler = (
     socket.join(room.roomId);
     socket.to(room.roomId).emit("newMemberJoinRoom", newMember, room);
     socket.emit("newMemberJoinRoom", newMember, room);
-    socket.on("message", (data: string) => {
-      socket.to(room.roomId as string).emit("newMessageToGroup", data);
+    socket.on("message", (data: OnNewMessageType) => {
+      const messageToBroadcast: EmitMessageType = {
+        ...data,
+        socketId: socket.id,
+      };
+      socket
+        .to(room.roomId as string)
+        .emit("newMessageToGroup", messageToBroadcast);
+      socket.emit("newMessageToGroup", messageToBroadcast);
     });
     socket.on("disconnect", () => {
       if (room.roomId) {
