@@ -37,6 +37,7 @@ export const roomSocketHandler = (
     socket.to(room.roomId).emit("newMemberJoinRoom", newMember, room);
     socket.emit("newMemberJoinRoom", newMember, room);
     socket.on("message", (data: OnNewMessageType) => {
+      console.log("new message: ",socket.id, ". content: ",data.content,". Username: ",data.username);
       const messageToBroadcast: EmitMessageType = {
         ...data,
         socketId: socket.id,
