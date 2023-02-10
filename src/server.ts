@@ -23,7 +23,7 @@ app.use(
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  return res.send("hello from kconnect signalling server 01");
+  return res.send("hello from kconnect signalling server update 10/2/2023");
 });
 
 app.use("/room", roomRouter);

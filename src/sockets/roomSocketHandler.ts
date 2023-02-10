@@ -35,6 +35,9 @@ export const roomSocketHandler = (
     socket.join(room.roomId);
     socket.to(room.roomId).emit("newMemberJoinRoom", newMember, room);
     socket.emit("newMemberJoinRoom", newMember, room);
+    socket.on("message", (data: string) => {
+      socket.to(room.roomId as string).emit("newMessageToGroup", data);
+    });
     socket.on("disconnect", () => {
       if (room.roomId) {
         const [memberLeft, roomUpdated] = RoomService.leaveRoom(

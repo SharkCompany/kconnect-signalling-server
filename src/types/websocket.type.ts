@@ -7,7 +7,7 @@ export interface ServerToClientEvents {
   noArg: () => void;
   basicEmit: (a: number, b: string, c: Buffer) => void;
   withAck: (d: string, callback: (e: number) => void) => void;
-  mess: (d: string) => void;
+  newMessageToGroup: (d: string) => void;
   newMemberJoinRoom: (member: MemberModel, room: RoomModel) => void;
   memberLeaveRoom: (member: MemberModel, room: RoomModel) => void;
   joinRoom: (room: RoomModel) => void;
